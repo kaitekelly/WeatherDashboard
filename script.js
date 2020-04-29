@@ -1,10 +1,11 @@
-let searchTerm = $("search").val();
-
 
 let city = $(".city");
 let wind = $(".wind");
 let humidity = $(".humidity");
 let temp = $(".temp");
+
+//array search terms are pushed to
+let searchArr = [];
 
 
 let APIKey = "b9330bfd0b1bf5fe0c849c27df315565";
@@ -23,7 +24,12 @@ $(document).ready(function () {
         event.preventDefault();
 
         //grab search term from input search field
-        let citySearch = $("#search").val();
+        let searchTerm = $("#search").val().trim();
+        // let citySearch = $("#search").val();
+
+        searchArr.push(searchTerm);
+
+        $("<li>").text(SearchTerm).prepend(".list-group-item");
 
         //ajax call for local weather
         $.ajax({
@@ -33,11 +39,13 @@ $(document).ready(function () {
             console.log(response);
         });
 
-    }).then(function (response) {
+    }).then(function(response) {
         //log queryURL
         console.log(queryURL);
         //log the resulting object
         console.log(response);
+
+        // let cityResult  = searchTerm;
 
         //transfer content to HTML
         let cityName = $(".jumbotron").text(response.city + "Weather Details");

@@ -6,7 +6,7 @@ let temp = $(".temp");
 
 // let searchInput = $("#search").val();
 
-$(searchInput).attr("placeholder", "Search Destination Here");
+// $(searchInput).attr("placeholder", "Search Destination Here");
 // $(SearchInput).text(SearchTerm).prepend(".list-group-item");
 
 //array search terms are pushed to
@@ -33,19 +33,16 @@ $(document).ready(function () {
         searchArr.push(searchTerm);
 
         //add search term to top of list of cities
-        $("<li>").text(SearchTerm).prepend(".list-group-item");
+        $("<li>").text(searchTerm).prepend(".list-group-item");
 
         //ajax call for local weather
         $.ajax({
-            url: queryURL,
-            method: "GET"
+            type: "GET",
+            url: queryURL
         }).then(function (response) {
             $("h1").text(JSON.stringify(response));
-            console.log(response);
-        });
-
-    }).then(function(response) {
-        //log queryURL
+          
+            //log queryURL
         console.log(queryURL);
         //log the resulting object
         console.log(response);
@@ -75,8 +72,16 @@ $(document).ready(function () {
 
         //need to add CitySearch text to li or city search name to searched list
         let cityResult = $("<li>").prepend(".list-group-item");
+        });
 
     })
+    
+    
+    
+    // .then(function(response) {
+        
+
+   
 
 
 

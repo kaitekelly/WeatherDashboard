@@ -8,9 +8,7 @@ let temp = $(".temp");
 let searchArr = [];
 
 
-let APIKey = "b9330bfd0b1bf5fe0c849c27df315565";
-
-
+let APIKey = "&appid=b9330bfd0b1bf5fe0c849c27df315565";
 
 
 $(document).ready(function () {
@@ -23,7 +21,7 @@ $(document).ready(function () {
         // let citySearch = $("#search").val();
 
         //construct the URL
-        let queryURL = "https://api.openweathermap.org/data/2.5/weather?" +
+        let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
          searchTerm + APIKey;
 
         //add name of search term to search array 

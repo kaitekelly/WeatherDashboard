@@ -10,12 +10,7 @@ let searchArr = [];
 
 let APIKey = "b9330bfd0b1bf5fe0c849c27df315565";
 
-let queryURL = "https://api.openweathermap.org/data/2.5/weather?" +
-    searchTerm + APIKey;
 
-console.log(queryURL);
-
-console.log(response);
 
 
 $(document).ready(function () {
@@ -27,8 +22,14 @@ $(document).ready(function () {
         let searchTerm = $("#search").val().trim();
         // let citySearch = $("#search").val();
 
+        //construct the URL
+        let queryURL = "https://api.openweathermap.org/data/2.5/weather?" +
+         searchTerm + APIKey;
+
+        //add name of search term to search array 
         searchArr.push(searchTerm);
 
+        //add search term to top of list of cities
         $("<li>").text(SearchTerm).prepend(".list-group-item");
 
         //ajax call for local weather
@@ -36,6 +37,7 @@ $(document).ready(function () {
             url: queryURL,
             method: "GET"
         }).then(function (response) {
+            $("h1").text(JSON.stringify(response));
             console.log(response);
         });
 

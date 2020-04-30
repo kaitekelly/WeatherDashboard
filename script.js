@@ -40,9 +40,9 @@ $(document).ready(function () {
             $("h1").text(JSON.stringify(response));
           
             //log queryURL
-        // console.log(queryURL);
+        console.log(queryURL);
         //log the resulting object
-        // console.log(response);
+        console.log(response);
 
         // let cityResult  = searchTerm;
 

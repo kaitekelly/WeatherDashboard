@@ -4,6 +4,11 @@ let wind = $(".wind");
 let humidity = $(".humidity");
 let temp = $(".temp");
 
+// let searchInput = $("#search").val();
+
+$(searchInput).attr("placeholder", "Search Destination Here");
+// $(SearchInput).text(SearchTerm).prepend(".list-group-item");
+
 //array search terms are pushed to
 let searchArr = [];
 
@@ -13,7 +18,7 @@ let APIKey = "&appid=b9330bfd0b1bf5fe0c849c27df315565";
 
 $(document).ready(function () {
 
-    $("#search").click(function(event) {
+    $("#searchBtn").click(function(event) {
         event.preventDefault();
 
         //grab search term from input search field

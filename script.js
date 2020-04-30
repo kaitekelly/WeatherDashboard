@@ -11,10 +11,7 @@ let temp = $(".temp");
 
 //array search terms are pushed to
 let searchArr = [];
-
-
 let APIKey = "&appid=b9330bfd0b1bf5fe0c849c27df315565";
-
 
 $(document).ready(function () {
 
@@ -24,7 +21,7 @@ $(document).ready(function () {
         //grab search term from input search field
         let searchTerm = $("#search").val().trim();
         // let citySearch = $("#search").val();
-
+        console.log(searchTerm);
         //construct the URL
         let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
          searchTerm + APIKey;
@@ -43,9 +40,9 @@ $(document).ready(function () {
             $("h1").text(JSON.stringify(response));
           
             //log queryURL
-        console.log(queryURL);
+        // console.log(queryURL);
         //log the resulting object
-        console.log(response);
+        // console.log(response);
 
         // let cityResult  = searchTerm;
 

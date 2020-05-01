@@ -50,17 +50,20 @@ $(document).ready(function () {
         let cityName = $(".jumbotron").text(searchTerm + " Weather Details");
         let windData = $("<p>").text("Wind Speed: " + response.wind.speed);
         let humidityData = $("<p>").text("Humidity: " + response.main.humidity + "%");
+        let weatherImg   = $("<img>").text(response.weather[0].icon);
+
+        console.log(response.weather[0].icon);
 
         // Convert the temp to fahrenheit
-        var tempF = (response.main.temp - 273.15) * 1.80 + 32;
+        let tempF = (response.main.temp - 273.15) * 1.80 + 32;
         let roundedTemp = Math.floor(tempF);
 
         //temp elements added to html
-        let tempData = $("<p>").text("Temp (K): " + response.main.temp);
-        let tempDataF = $("<p>").text("Temp (F): " + roundedTemp);
+        let tempData = $("<p>").text("Temp (K): " + response.main.temp + "° $Million Dollars$");
+        let tempDataF = $("<p>").text("Temp (F): " + roundedTemp +"°");
 
         //append the elements together
-        cityName.append(windData, humidityData, tempData, tempDataF);
+        cityName.append(weatherImg, windData, humidityData, tempData, tempDataF);
 
         $("container").append(cityName);
 

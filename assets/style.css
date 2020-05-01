@@ -1,5 +1,26 @@
 #navbar {
     font-family: sans-serif;
-    font-size: 24px;
+    font-size: 36px;
     text-align: center;
 }
+
+.list-group-item {
+
+
+
+}
+
+.li {
+
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+  list-style: none;
+  }
+
+  /* h1 {
+    <h1 class="display-4">Fluid jumbotron</h1>
+
+  } */

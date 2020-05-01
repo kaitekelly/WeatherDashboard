@@ -47,15 +47,17 @@ $(document).ready(function () {
         // let cityResult  = searchTerm;
 
         //transfer content to HTML
-        let cityName = $(".jumbotron").text(response.city + "Weather Details");
-        let windData = $("<p>").text("Wind Speed:" + response.wind);
-        let humidityData = $("<p>").text("Humidity:" + response.humidity);
+        let cityName = $(".jumbotron").text(searchTerm + " Weather Details");
+        let windData = $("<p>").text("Wind Speed: " + response.wind.speed);
+        let humidityData = $("<p>").text("Humidity: " + response.main.humidity + "%");
 
         // Convert the temp to fahrenheit
-        var tempF = (response.main.tempData - 273.15) * 1.80 + 32;
+        var tempF = (response.main.temp - 273.15) * 1.80 + 32;
+        let roundedTemp = Math.floor(tempF);
+
         //temp elements added to html
-        let tempData = $("<p>").text("Temp (K):" + response.temp);
-        let tempDataF = $("<p>").text("Temp (F):" + tempF);
+        let tempData = $("<p>").text("Temp (K): " + response.main.temp);
+        let tempDataF = $("<p>").text("Temp (F): " + roundedTemp);
 
         //append the elements together
         cityName.append(windData, humidityData, tempData, tempDataF);
@@ -68,7 +70,9 @@ $(document).ready(function () {
         console.log("Temperature (F): " + tempF);
 
         //need to add CitySearch text to li or city search name to searched list
-        let cityResult = $("<li>").prepend(".list-group-item");
+        // $("<li>").prepend(".list-group-item");
+        $("<li>").appendTo(".list-group-item").prepend(searchTerm);
+
         });
 
     })

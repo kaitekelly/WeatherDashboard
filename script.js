@@ -49,6 +49,8 @@ $(document).ready(function () {
             var iconcode = response.weather[0].icon;
             var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
             let weatherImg = $("<img>").attr("src", iconurl);
+            let date = $("<p>").text(moment().format("MMM Do YY")); 
+            console.log(date);
 
             // Convert the temp to fahrenheit
             let tempF = (response.main.temp - 273.15) * 1.80 + 32;
@@ -96,24 +98,33 @@ $(document).ready(function () {
 
             //start 5 day forecast ajax
 
-            let day5QueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchTerm + APIKey;
+            let day5QueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchTerm + "&units=imperial"+ APIKey;
             for (i = 0; i < 5; i++) {
 
                 $.ajax({
                     type: "GET",
                     url: day5QueryURL,
                 }).then(function (response5Day) {
-                    let fiveDay = $("<h3>").text("Temp: " + JSON.stringify(response5Day.list[i].main.temp));
+                    let fiveDay1 = $("#tempDay1").text("Temp: " + JSON.stringify(response5Day.list[0].main.temp));
+                    console.log(fiveDay1);
+                    let fiveHumidity1 = $("<p>").attr("id", "humDay1").text("Humidity: " + JSON.stringify(response5Day.list[0].main.humidity));
+                    fiveDay1.append(fiveHumidity1);
                     console.log(response5Day);
-                    let fiveHumidity = $("<h3>").text("Humidity: " + JSON.stringify(response.list[i].main.humidity));
-                    console.log(response5Day.list[i].main.temp);
-                    console.log(response.list[i].main.humidity);
+                    console.log(fiveHumidity1);
+                    let iconcode1 = response5Day.list[0].weather[0].icon;
+                    let iconurl = "http://openweathermap.org/img/w/" + iconcode1 + ".png";
+                    let weatherImgDay1 = $("<img>").attr("src", iconurl);
+                    $(".card-title").text(weatherImgDay1);
                 })
             }
+            $('element').attr('id', 'value');
+            // select Element
+            // edit element to display response Data
+            // place element on page
 
 
 
-
+               
 
 
         })

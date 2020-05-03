@@ -41,13 +41,13 @@ $(document).ready(function () {
             // console.log(response);
             // let cityResult  = searchTerm;
             //transfer content to HTML
-            let cityName = $(".jumbotron").text(searchTerm + " Weather Details");
-            let windData = $("<p>").text("Wind Speed: " + response.wind.speed);
-            let humidityData = $("<p>").text("Humidity: " + response.main.humidity + "%");
+            let cityName = $(".jumbotron").text(searchTerm + " Weather Details").addClass("lead");
+            let windData = $("<p>").text("Wind Speed: " + response.wind.speed).addClass("lead");
+            let humidityData = $("<p>").text("Humidity: " + response.main.humidity + "%").addClass("lead");
             var iconcode = response.weather[0].icon;
             var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
             let weatherImg = $("<img>").attr("src", iconurl);
-            let date = $("<p>").text(moment.unix().format("MMM Do YY"));
+            let date = $("<p>").text(moment.unix().format("MMM Do YY")).addClass("lead");
             console.log(date);
             $("#taco").empty();
             // Convert the temp to fahrenheit
@@ -55,8 +55,8 @@ $(document).ready(function () {
             let roundedTemp = Math.floor(tempF);
 
             //temp elements added to html
-            let tempData = $("<p>").text("Temp (K): " + response.main.temp + "°");
-            let tempDataF = $("<p>").text("Temp (F): " + roundedTemp + "°");
+            let tempData = $("<p>").text("Temp (K): " + response.main.temp + "°").addClass("lead");
+            let tempDataF = $("<p>").text("Temp (F): " + roundedTemp + "°").addClass("lead");
 
             //append the elements together
             cityName.append(weatherImg, windData, humidityData, tempData, tempDataF);
@@ -80,8 +80,9 @@ $(document).ready(function () {
                 url: uvIndexURL,
             }).then(function (responseUV) {
                 console.log(responseUV);
-                let currentUV = $("<div>").text("UV Index: " + responseUV.value).addClass("lead");
+                let currentUV = $("<div>").attr('id', '#uv-index').text("UV Index: " + responseUV.value).addClass("lead");
                 console.log(responseUV.value);
+                console.log(currentUV);
 
                 if (currentUV >= 0 && currentUV < 3) {
                     $("#uv-index").addClass("badge-success");

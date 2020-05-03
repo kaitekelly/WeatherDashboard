@@ -20,17 +20,15 @@ $(document).ready(function () {
         //grab search term from input search field
         let searchTerm = $("#search").val().trim();
         // let citySearch = $("#search").val();
-        console.log(searchTerm);
+        // console.log(searchTerm);
         //construct the URL
         let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
             searchTerm + APIKey;
 
         //add name of search term to search array 
         searchArr.push(searchTerm);
-
         //add search term to top of list of cities
         $("<button>").text(searchTerm).prepend(".list-group-item");
-
         //ajax call for local weather
         $.ajax({
             type: "GET",
@@ -38,9 +36,9 @@ $(document).ready(function () {
         }).then(function (response) {
             $("h1").text(JSON.stringify(response));
             //log queryURL
-            console.log(queryURL);
+            // console.log(queryURL);
             //log the resulting object
-            console.log(response);
+            // console.log(response);
             // let cityResult  = searchTerm;
             //transfer content to HTML
             let cityName = $(".jumbotron").text(searchTerm + " Weather Details");
@@ -49,7 +47,7 @@ $(document).ready(function () {
             var iconcode = response.weather[0].icon;
             var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
             let weatherImg = $("<img>").attr("src", iconurl);
-            let date = $("<p>").text(moment().format("MMM Do YY")); 
+            let date = $("<p>").text(moment.unix().format("MMM Do YY"));
             console.log(date);
 
             // Convert the temp to fahrenheit
@@ -65,9 +63,9 @@ $(document).ready(function () {
 
             $("container").append(cityName);
             // Log the data in the console as well
-            console.log("Wind Speed: " + response.wind.speed + "MPH");
-            console.log("Humidity: " + response.main.humidity);
-            console.log("Temperature (F): " + tempF);
+            // console.log("Wind Speed: " + response.wind.speed + "MPH");
+            // console.log("Humidity: " + response.main.humidity);
+            // console.log("Temperature (F): " + tempF);
 
             //need to add CitySearch text to li or city search name to searched list
             // $("<li>").prepend(".list-group-item");
@@ -81,10 +79,9 @@ $(document).ready(function () {
                 type: "GET",
                 url: uvIndexURL,
             }).then(function (responseUV) {
-                console.log(responseUV);
-                let currentUV = $("<span>").text("UV Index: " + responseUV.value).addClass("uv-index");
-                console.log(responseUV.value);
-                cityName.append(currentUV);
+                // console.log(responseUV);
+                let currentUV = $("#uv-index").text("UV Index: " + responseUV.value);
+                // console.log(responseUV.value);
 
                 if (currentUV >= 0 && currentUV < 3) {
                     $("#uv-index").addClass("badge-success");
@@ -93,43 +90,86 @@ $(document).ready(function () {
                 } else if (currentUV >= 8) {
                     $("#uv-index").addClass("badge-danger");
                 }
-
+                cityName.append(currentUV);
             })
-
-            //start 5 day forecast ajax
-
-            let day5QueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchTerm + "&units=imperial"+ APIKey;
-            for (i = 0; i < 5; i++) {
-
-                $.ajax({
-                    type: "GET",
-                    url: day5QueryURL,
-                }).then(function (response5Day) {
-                    let fiveDay1 = $("#tempDay1").text("Temp: " + JSON.stringify(response5Day.list[0].main.temp));
-                    console.log(fiveDay1);
-                    let fiveHumidity1 = $("<p>").attr("id", "humDay1").text("Humidity: " + JSON.stringify(response5Day.list[0].main.humidity));
-                    fiveDay1.append(fiveHumidity1);
-                    console.log(response5Day);
-                    console.log(fiveHumidity1);
-                    let iconcode1 = response5Day.list[0].weather[0].icon;
-                    let iconurl = "http://openweathermap.org/img/w/" + iconcode1 + ".png";
-                    let weatherImgDay1 = $("<img>").attr("src", iconurl);
-                    $(".card-title").text(weatherImgDay1);
-                })
-            }
-            $('element').attr('id', 'value');
-            // select Element
-            // edit element to display response Data
-            // place element on page
-
-
-
-               
-
-
         })
+        
+        //start 5 day forecast ajax
+        let currentDate;
+        let day5QueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchTerm + "&units=imperial" + APIKey;
+
+        $.ajax({
+            type: "GET",
+            url: day5QueryURL,
+        }).then(function (response5Day) {
+            console.log(response5Day);
+            
+            for (i = 0; i < 5; i++) {
+                let fiveDayCard = $(".cardDiv").addClass(".cardbody");
+                let fiveDate = $("<h5>").text(moment.unix(response5Day.list[i].dt).format("MM/DD/YYYY"));
+                console.log(fiveDate);
+
+                let fiveDayTemp = $("<p>").text("Temp: " + JSON.stringify(response5Day.list[i].main.temp));
+                console.log(fiveDayTemp);
+                fiveDayTemp.attr("id", "#fiveDayTemp[i]");
+                
+                let fiveHumidity = $("<p>").attr("id", "humDay").text("Humidity: " + JSON.stringify(response5Day.list[i].main.humidity));
+                fiveHumidity.attr("id", "#fiveHumidity[i]");
+                // fiveDay.append(fiveHumidity);
+
+                console.log(fiveHumidity);
+                let iconCode = response5Day.list[i].weather[i].icon;
+                console.log(iconCode);
+                let iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png";
+                let weatherImgDay = $("<img>").attr("src", iconURL);
+                $("#testImage").attr("src", iconURL);
+                console.log(weatherImgDay);
+                
+                $(".cardDiv").empty();
+                $(fiveDayCard).append(fiveDate, weatherImgDay, fiveDayTemp, fiveHumidity);
+                
+                
+                $("#fiveDayTemp[i]").empty();
+                console.log(response5Day);
+                // $(fiveDayTemp).empty();
+                // $(fiveHumidity).empty();
+               
+            }
+            
+        })
+
+        // .ajax({
+        //     type: "GET",
+        //     url: day5QueryURL,
+        // }).then(function (response5Day) {
+        //     console.log(response5Day);
+        //     console.log();
+        //     for (i = 0; i < 5; i++) {
+        //         let fiveDay1 = $("#tempDay1").text("Temp: " + JSON.stringify(response5Day.list[0].main.temp));
+        //         console.log(fiveDay1);
+        //         let fiv$eHumidity1 = $("<p>").attr("id", "humDay1").text("Humidity: " + JSON.stringify(response5Day.list[0].main.humidity));
+        //         fiveDay1.append(fiveHumidity1);
+
+        //         console.log(fiveHumidity1);
+        //         let iconcode1 = response5Day.list[0].weather[0].icon;
+        //         console.log(iconcode1);
+        //         let iconurl = "http://openweathermap.org/img/w/" + iconcode1 + ".png";
+        //         let weatherImgDay1 = $("<img>").attr("src", iconurl);
+        //         $("#testImage").attr("src", iconurl);
+        //         console.log(weatherImgDay1);
+        //     }
+        // })
+
+        // $('element').attr('id', 'value');
+        // select Element
+        // edit element to display response Data
+        // place element on page
+
+
+
+
+
 
     })
 
-
-});
+})

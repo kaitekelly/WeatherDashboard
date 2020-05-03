@@ -4,11 +4,20 @@
     text-align: center;
 }
 
-.list-group-item {
-
-
-
+.card-body {
+    font-family: sans-serif;
+    background-color: rgb(72, 160,181);
+    font-size: 16pt;
+    color: white;
+    width: 200px;
+    border: 1px;
 }
+
+/* .list-group-item {
+
+
+
+} */
 
 /* .li {
     font-size: 14pt;
@@ -18,7 +27,7 @@
 .nav {
     display: flex;
     justify-content: center;
-  list-style: none;
+    list-style: none;
   }
 
   /* h1 {
@@ -29,5 +38,9 @@
   #daycard {
       float: left;
       margin: 6px;
+
+  }
+
+  p {
 
   }

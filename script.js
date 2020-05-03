@@ -3,11 +3,6 @@ let wind = $(".wind");
 let humidity = $(".humidity");
 let temp = $(".temp");
 
-// let searchInput = $("#search").val();
-
-// $(searchInput).attr("placeholder", "Search Destination Here");
-// $(SearchInput).text(SearchTerm).prepend(".list-group-item");
-
 //array search terms are pushed to
 let searchArr = [];
 let APIKey = "&appid=b9330bfd0b1bf5fe0c849c27df315565";
@@ -19,8 +14,8 @@ $(document).ready(function () {
 
         //grab search term from input search field
         let searchTerm = $("#search").val().trim();
-        // let citySearch = $("#search").val();
-        // console.log(searchTerm);
+        // $("#search").empty();
+
         //construct the URL
         let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
             searchTerm + APIKey;
@@ -35,11 +30,6 @@ $(document).ready(function () {
             url: queryURL
         }).then(function (response) {
             $("h1").text(JSON.stringify(response));
-            //log queryURL
-            // console.log(queryURL);
-            //log the resulting object
-            // console.log(response);
-            // let cityResult  = searchTerm;
             //transfer content to HTML
             let cityName = $(".jumbotron").text(searchTerm + " Weather Details").addClass("city-weather");
             let windData = $("<p>").text("Wind Speed: " + response.wind.speed).addClass("lead");
@@ -60,16 +50,8 @@ $(document).ready(function () {
 
             //append the elements together
             cityName.append(weatherImg, windData, humidityData, tempData, tempDataF);
-
             $("container").append(cityName);
-            // Log the data in the console as well
-            // console.log("Wind Speed: " + response.wind.speed + "MPH");
-            // console.log("Humidity: " + response.main.humidity);
-            // console.log("Temperature (F): " + tempF);
-
-            //need to add CitySearch text to li or city search name to searched list
-            // $("<li>").prepend(".list-group-item");
-            $("<li>").appendTo(".list-group-item").prepend(searchTerm);
+            $("<li>").attr('id', 'li').appendTo(".list-group-item").text(searchTerm);
 
             //ajax call for UV Index
             let latitude = response.coord.lat;
@@ -95,11 +77,7 @@ $(document).ready(function () {
 
             })
 
-
-
             //start 5 day forecast ajax
-            let currentDate;
-            // let day5QueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchTerm + "&units=imperial" + APIKey;
             let day5QueryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&units=imperial" + APIKey;
 
             for (let i = 1; i < 6; i++) {
@@ -121,7 +99,6 @@ $(document).ready(function () {
 
                     let fiveHumidity = $("<p>").attr("id", "humDay").text("Humidity: " + JSON.stringify(response5Day.daily[i].humidity));
                     fiveHumidity.attr("id", "#fiveHumidity[i]");
-                    // fiveDay.append(fiveHumidity);
 
                     console.log(fiveHumidity);
                     let iconCode = response5Day.daily[i].weather[0].icon;
@@ -131,14 +108,12 @@ $(document).ready(function () {
                     $("#testImage").attr("src", iconURL);
                     console.log(weatherImgDay);
 
-                    
                     cardbodyElem.append(fiveDate);
                     cardbodyElem.append(weatherImgDay); 
                     cardbodyElem.append(fiveDayTemp); 
                     cardbodyElem.append(fiveHumidity);
                     fiveDayCard.append(cardbodyElem);
                     $("#taco").append(fiveDayCard);
-
 
                     $("#fiveDayTemp[i]").empty();
                     console.log(response5Day);
@@ -149,37 +124,6 @@ $(document).ready(function () {
 
             }
         })
-
-        // .ajax({
-        //     type: "GET",
-        //     url: day5QueryURL,
-        // }).then(function (response5Day) {
-        //     console.log(response5Day);
-        //     console.log();
-        //     for (i = 0; i < 5; i++) {
-        //         let fiveDay1 = $("#tempDay1").text("Temp: " + JSON.stringify(response5Day.list[0].main.temp));
-        //         console.log(fiveDay1);
-        //         let fiv$eHumidity1 = $("<p>").attr("id", "humDay1").text("Humidity: " + JSON.stringify(response5Day.list[0].main.humidity));
-        //         fiveDay1.append(fiveHumidity1);
-
-        //         console.log(fiveHumidity1);
-        //         let iconcode1 = response5Day.list[0].weather[0].icon;
-        //         console.log(iconcode1);
-        //         let iconurl = "http://openweathermap.org/img/w/" + iconcode1 + ".png";
-        //         let weatherImgDay1 = $("<img>").attr("src", iconurl);
-        //         $("#testImage").attr("src", iconurl);
-        //         console.log(weatherImgDay1);
-        //     }
-        // })
-
-        // $('element').attr('id', 'value');
-        // select Element
-        // edit element to display response Data
-        // place element on page
-
-
-
-
 
 
     })

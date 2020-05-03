@@ -110,6 +110,7 @@ $(document).ready(function () {
                 
                     let fiveDayCard = $("<div>").addClass(".cardbody");
                     let fiveDate = $("<h5>").text(moment.unix(response5Day.daily[i].dt).format("MM/DD/YYYY"));
+                    fiveDayCard.addClass("headline");
                     console.log(fiveDate);
 
                     let fiveDayTemp = $("<p>").text("Temp: " + response5Day.daily[i].temp.max);

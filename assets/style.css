@@ -4,37 +4,15 @@
     text-align: center;
 }
 
-.cardbody {
+.card-body {
     font-family: sans-serif;
     background-color: rgb(72, 160,181);
     font-size: 16pt;
     color: white;
-    width: 200px;
-    border: 1px;
     float: left;
-}
-
-.card-body {
     border: solid black 4px;
+    width: 18rem;
 }
-
-/* #taco {
-    background-color: blue;
-    border: solid black 4px;
-} */
-
-
-
-/* .list-group-item {
-
-
-
-} */
-
-/* .li {
-    font-size: 14pt;
-
-} */
 
 .nav {
     display: flex;
@@ -42,17 +20,8 @@
     list-style: none;
   }
 
-  /* h1 {
-    font-size: 36pt;
+ .headline {
+     font-size: 34px;
 
-  } */
+ } 
 
-  #daycard {
-      float: left;
-      margin: 6px;
-
-  }
-
-  p {
-
-  }

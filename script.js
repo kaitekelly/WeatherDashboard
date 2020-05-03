@@ -41,7 +41,7 @@ $(document).ready(function () {
             // console.log(response);
             // let cityResult  = searchTerm;
             //transfer content to HTML
-            let cityName = $(".jumbotron").text(searchTerm + " Weather Details").addClass("lead");
+            let cityName = $(".jumbotron").text(searchTerm + " Weather Details").addClass("city-weather");
             let windData = $("<p>").text("Wind Speed: " + response.wind.speed).addClass("lead");
             let humidityData = $("<p>").text("Humidity: " + response.main.humidity + "%").addClass("lead");
             var iconcode = response.weather[0].icon;

@@ -49,7 +49,7 @@ $(document).ready(function () {
             let weatherImg = $("<img>").attr("src", iconurl);
             let date = $("<p>").text(moment.unix().format("MMM Do YY"));
             console.log(date);
-
+            $("#taco").empty();
             // Convert the temp to fahrenheit
             let tempF = (response.main.temp - 273.15) * 1.80 + 32;
             let roundedTemp = Math.floor(tempF);
@@ -92,50 +92,59 @@ $(document).ready(function () {
                 }
                 cityName.append(currentUV);
             })
-        })
-        
-        //start 5 day forecast ajax
-        let currentDate;
-        let day5QueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchTerm + "&units=imperial" + APIKey;
 
-        $.ajax({
-            type: "GET",
-            url: day5QueryURL,
-        }).then(function (response5Day) {
-            console.log(response5Day);
-            
-            for (i = 0; i < 5; i++) {
-                let fiveDayCard = $(".cardDiv").addClass(".cardbody");
-                let fiveDate = $("<h5>").text(moment.unix(response5Day.list[i].dt).format("MM/DD/YYYY"));
-                console.log(fiveDate);
 
-                let fiveDayTemp = $("<p>").text("Temp: " + JSON.stringify(response5Day.list[i].main.temp));
-                console.log(fiveDayTemp);
-                fiveDayTemp.attr("id", "#fiveDayTemp[i]");
-                
-                let fiveHumidity = $("<p>").attr("id", "humDay").text("Humidity: " + JSON.stringify(response5Day.list[i].main.humidity));
-                fiveHumidity.attr("id", "#fiveHumidity[i]");
-                // fiveDay.append(fiveHumidity);
 
-                console.log(fiveHumidity);
-                let iconCode = response5Day.list[i].weather[i].icon;
-                console.log(iconCode);
-                let iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png";
-                let weatherImgDay = $("<img>").attr("src", iconURL);
-                $("#testImage").attr("src", iconURL);
-                console.log(weatherImgDay);
-                
-                $(".cardDiv").empty();
-                $(fiveDayCard).append(fiveDate, weatherImgDay, fiveDayTemp, fiveHumidity);
-                
-                
-                $("#fiveDayTemp[i]").empty();
+            //start 5 day forecast ajax
+            let currentDate;
+            // let day5QueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + searchTerm + "&units=imperial" + APIKey;
+            let day5QueryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&units=imperial" + APIKey;
+
+            for (let i = 1; i < 6; i++) {
+            $.ajax({
+                url: day5QueryURL,
+                type: "GET"
+            }).then(function (response5Day) {
                 console.log(response5Day);
-                // $(fiveDayTemp).empty();
-                // $(fiveHumidity).empty();
-               
+                    let cardbodyElem = $("<div>").addClass("card-body");
+                
+                    let fiveDayCard = $("<div>").addClass(".cardbody");
+                    let fiveDate = $("<h5>").text(moment.unix(response5Day.daily[i].dt).format("MM/DD/YYYY"));
+                    console.log(fiveDate);
+
+                    let fiveDayTemp = $("<p>").text("Temp: " + response5Day.daily[i].temp.max);
+                    console.log(fiveDayTemp);
+                    fiveDayTemp.attr("id", "#fiveDayTemp[i]");
+
+                    let fiveHumidity = $("<p>").attr("id", "humDay").text("Humidity: " + JSON.stringify(response5Day.daily[i].humidity));
+                    fiveHumidity.attr("id", "#fiveHumidity[i]");
+                    // fiveDay.append(fiveHumidity);
+
+                    console.log(fiveHumidity);
+                    let iconCode = response5Day.daily[i].weather[0].icon;
+                    console.log(iconCode);
+                    let iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png";
+                    let weatherImgDay = $("<img>").attr("src", iconURL);
+                    $("#testImage").attr("src", iconURL);
+                    console.log(weatherImgDay);
+
+                    
+                    cardbodyElem.append(fiveDate);
+                    cardbodyElem.append(weatherImgDay); 
+                    cardbodyElem.append(fiveDayTemp); 
+                    cardbodyElem.append(fiveHumidity);
+                    fiveDayCard.append(cardbodyElem);
+                    $("#taco").append(fiveDayCard);
+
+
+                    $("#fiveDayTemp[i]").empty();
+                    console.log(response5Day);
+                    // $(fiveDayTemp).empty();
+                    // $(fiveHumidity).empty();
+
+                })
+
             }
-            
         })
 
         // .ajax({

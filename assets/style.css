@@ -4,14 +4,26 @@
     text-align: center;
 }
 
-.card-body {
+.cardbody {
     font-family: sans-serif;
     background-color: rgb(72, 160,181);
     font-size: 16pt;
     color: white;
     width: 200px;
     border: 1px;
+    float: left;
 }
+
+.card-body {
+    border: solid black 4px;
+}
+
+/* #taco {
+    background-color: blue;
+    border: solid black 4px;
+} */
+
+
 
 /* .list-group-item {
 

@@ -1,19 +1,21 @@
 .navbar {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 36px;
+    font-size: 40px;
     text-align: center;
     background-color: rgb(50, 50, 50);
 }
 
 .navbar-text {
 font-family: Arial, Helvetica, sans-serif;
-font-size: 36px;
+font-size: 40px;
+text-align: center;
 background-color: rgb(50, 50, 50);
+padding-left: 15px;
 }
 
 #weather-dashboard {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 36px;
+    font-size: 40px;
     text-align: center;
     background: rgb(50, 50, 50);
     color: white;
@@ -47,6 +49,12 @@ background-color: rgb(50, 50, 50);
 
  .city-weather {
     font-size: 36pt;
-    padding-left: 25px;
+    padding-left: 40px;
+    line-height: 32px;
+    padding-bottom: 60px;
+ }
+
+ #search {
+     width: 290px;
  }
 

@@ -79,9 +79,9 @@ $(document).ready(function () {
                 type: "GET",
                 url: uvIndexURL,
             }).then(function (responseUV) {
-                // console.log(responseUV);
-                let currentUV = $("#uv-index").text("UV Index: " + responseUV.value);
-                // console.log(responseUV.value);
+                console.log(responseUV);
+                let currentUV = $("<div>").text("UV Index: " + responseUV.value).addClass("lead");
+                console.log(responseUV.value);
 
                 if (currentUV >= 0 && currentUV < 3) {
                     $("#uv-index").addClass("badge-success");
@@ -91,6 +91,7 @@ $(document).ready(function () {
                     $("#uv-index").addClass("badge-danger");
                 }
                 cityName.append(currentUV);
+
             })
 
 

@@ -28,8 +28,9 @@ padding-left: 15px;
     font-size: 16pt;
     color: white;
     float: left;
-    border: solid black 4px;
+    border: solid rgb(74, 224, 226) 2px;
     width: 18rem;
+    margin-bottom: 20px;
 }
 
 .nav {
@@ -40,7 +41,7 @@ padding-left: 15px;
 
  .headline {
      font-size: 34px;
-     padding-left: 25px;
+     border: none;
  } 
 
  .lead {
@@ -56,6 +57,12 @@ padding-left: 15px;
 
  #search {
      width: 290px;
+    float: left;
+
+ }
+
+ #search-header {
+     margin-right: 25px;
  }
 
  .list-group-item {
@@ -65,3 +72,11 @@ padding-left: 15px;
  #li {
      padding: 20px;
  }
+
+#taco {
+    width: 18rem;
+}
+
+.cardbody {
+    border: none;
+}

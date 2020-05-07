@@ -32,6 +32,8 @@ $(document).ready(function () {
             $("h1").text(JSON.stringify(response));
             //transfer content to HTML
             let cityName = $(".jumbotron").text(searchTerm + " Weather Details").addClass("city-weather");
+            let currentDate = moment().format("  MM-DD-YYYY");
+            console.log(currentDate);
             let windData = $("<p>").text("Wind Speed: " + response.wind.speed).addClass("lead");
             let humidityData = $("<p>").text("Humidity: " + response.main.humidity + "%").addClass("lead");
             var iconcode = response.weather[0].icon;
@@ -49,7 +51,7 @@ $(document).ready(function () {
             let tempDataF = $("<p>").text("Temp (F): " + roundedTemp + "°").addClass("lead");
 
             //append the elements together
-            cityName.append(weatherImg, windData, humidityData, tempData, tempDataF);
+            cityName.append(weatherImg, currentDate, windData, humidityData, tempData, tempDataF);
             $("container").append(cityName);
             $("<li>").attr('id', 'li').appendTo(".list-group-item").text(searchTerm);
 

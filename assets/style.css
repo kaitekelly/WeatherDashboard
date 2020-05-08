@@ -66,6 +66,7 @@ padding-left: 15px;
  }
 
  .list-group-item {
+     /* float: left; */
      
  }
 
@@ -79,4 +80,15 @@ padding-left: 15px;
 
 .cardbody {
     border: none;
+}
+
+.badge-success {
+    width: 5px;
+    background-color: darkgreen;
+
+}
+
+#badge-warning {
+    background-color: yellow;
+    font-size: 18px;
 }

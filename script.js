@@ -12,8 +12,8 @@ $(document).ready(function () {
 
     $("#searchBtn").click(function (event) {
         event.preventDefault();
+        $("#search").empty();
         
-
         //grab search term from input search field
         let searchTerm = $("#search").val().trim();
 
@@ -60,12 +60,9 @@ $(document).ready(function () {
             let tempData = $("<p>").text("Temp (K): " + response.main.temp + "°").addClass("lead");
             let tempDataF = $("<p>").text("Temp (F): " + roundedTemp + "°").addClass("lead");
 
-           
             //append the elements together
             cityName.append(weatherImg, currentDate, windData, humidityData, tempData, tempDataF);
             $("container").append(cityName);
-            // $("<li>").attr('id', 'li').appendTo(".list-group-item").text(searchTerm);
-
 
             //ajax call for UV Index
             let latitude = response.coord.lat;
@@ -89,11 +86,8 @@ $(document).ready(function () {
                 } else if (responseUV.value >= 11) {
                     $(uvValue).addClass("badge-danger");
                 }
-
-
                 cityName.append(currentUV);
                 renderSearchList();
-
             })
 
             //start 5 day forecast ajax
@@ -129,19 +123,15 @@ $(document).ready(function () {
                     fiveDayCard.append(cardbodyElem);
                     $("#taco").append(fiveDayCard);
                     $("#fiveDayTemp[i]").empty();
-
                 })
-
             }
         })
-
-
     })
-
 })
 
 function renderSearchList() {
     let searchList = JSON.parse(localStorage.getItem("cities"));
+    $("#search-list").empty();
             if (searchList) {
               for (i=0; i< searchList.length; i++) {
                 let listBtn = $("<button>").attr('class', 'btn btn-secondary').text(searchList[i]);
@@ -150,9 +140,5 @@ function renderSearchList() {
                 $("#search-list").append(listElem);
               }
               
-              
-              
             }
-            
-
 }

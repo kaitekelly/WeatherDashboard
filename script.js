@@ -9,13 +9,17 @@ let APIKey = "&appid=b9330bfd0b1bf5fe0c849c27df315565";
 
 $(document).ready(function () {
     renderSearchList();
+    // clearFields();
 
     $("#searchBtn").click(function (event) {
         event.preventDefault();
-        $("#search").empty();
+    
+        
         
         //grab search term from input search field
         let searchTerm = $("#search").val().trim();
+
+
 
         //construct the URL
         let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -88,6 +92,7 @@ $(document).ready(function () {
                 }
                 cityName.append(currentUV);
                 renderSearchList();
+                
             })
 
             //start 5 day forecast ajax
@@ -127,7 +132,15 @@ $(document).ready(function () {
             }
         })
     })
+
 })
+//need to figure out where to call the clearFields function to reset Search input
+function clearFields() {
+    $("#searchBtn").click(function() {
+    $("#search").val("");
+    });
+    
+}
 
 function renderSearchList() {
     let searchList = JSON.parse(localStorage.getItem("cities"));
@@ -141,4 +154,5 @@ function renderSearchList() {
               }
               
             }
+            
 }

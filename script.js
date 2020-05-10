@@ -80,11 +80,17 @@ $(document).ready(function () {
                 currentUV.append(uvValue);
                 if (responseUV.value >= 0 && responseUV.value < 3) {
                     $(uvValue).addClass("badge-success");
-                } else if (responseUV.value >= 3 && responseUV.value < 8) {
+                } else if (responseUV.value >= 3 && responseUV.value < 6) {
+                    $(uvValue).addClass("badge-mild");
+                } else if (responseUV.value >= 6 && responseUV.value < 8) {
                     $(uvValue).addClass("badge-warning");
-                } else if (responseUV.value >= 8) {
+                } else if (responseUV.value >= 8 && responseUV.value < 11) {
                     $(uvValue).addClass("badge-veryhigh");
+                } else if (responseUV.value >= 11) {
+                    $(uvValue).addClass("badge-danger");
                 }
+
+
                 cityName.append(currentUV);
                 renderSearchList();
 
@@ -142,10 +148,10 @@ function renderSearchList() {
                 let listElem = $("<li>").attr('class', 'list-group-item');
                 listElem.append(listBtn);
                 $("#search-list").append(listElem);
-                
-                          
-
               }
+              
+              
+              
             }
             
 

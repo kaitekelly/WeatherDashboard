@@ -83,18 +83,26 @@ padding-left: 15px;
 }
 
 .badge-success {
-    width: 5px;
     background-color: darkgreen;
+}
+
+.badge-mild {
+    background-color: yellow;
 
 }
 
+
 .badge-warning {
-    background-color: yellow;
+    background-color:orange;
   
 }
 
 .badge-veryhigh {
     background-color: red;
+ 
+}
+.badge-danger {
+    background-color: darkmagenta;
  
 }
 

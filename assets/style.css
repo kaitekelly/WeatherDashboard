@@ -88,7 +88,13 @@ padding-left: 15px;
 
 }
 
-#badge-warning {
+.badge-warning {
     background-color: yellow;
-    font-size: 18px;
+  
 }
+
+.badge-veryhigh {
+    background-color: red;
+ 
+}
+

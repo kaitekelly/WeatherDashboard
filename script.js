@@ -75,18 +75,15 @@ $(document).ready(function () {
                 type: "GET",
                 url: uvIndexURL,
             }).then(function (responseUV) {
-                // console.log(responseUV);
-                let currentUV = $("<div>").addClass('lead uv-index').text("UV Index: " + responseUV.value);
-                // console.log(responseUV.value);
-                // console.log(currentUV);
-                
-
+                let currentUV = $("<div>").addClass('lead uv-index').text("UV Index: ");
+                let uvValue = $("<span class='badge id='current-uv-level'>").text(responseUV.value);
+                currentUV.append(uvValue);
                 if (responseUV.value >= 0 && responseUV.value < 3) {
-                    $(".uv-index").addClass("badge-success");
+                    $(uvValue).addClass("badge-success");
                 } else if (responseUV.value >= 3 && responseUV.value < 8) {
-                    $(currentUV).addClass("badge-warning");
+                    $(uvValue).addClass("badge-warning");
                 } else if (responseUV.value >= 8) {
-                    $(".badge").addClass("badge-danger");
+                    $(uvValue).addClass("badge-veryhigh");
                 }
                 cityName.append(currentUV);
                 renderSearchList();
@@ -107,22 +104,17 @@ $(document).ready(function () {
                     let fiveDayCard = $("<div>").addClass(".cardbody");
                     let fiveDate = $("<h5>").text(moment.unix(response5Day.daily[i].dt).format("MM/DD/YYYY"));
                     fiveDayCard.addClass("headline");
-                    // console.log(fiveDate);
 
                     let fiveDayTemp = $("<p>").text("Temp: " + response5Day.daily[i].temp.max);
-                    // console.log(fiveDayTemp);
                     fiveDayTemp.attr("id", "#fiveDayTemp[i]");
 
                     let fiveHumidity = $("<p>").attr("id", "humDay").text("Humidity: " + JSON.stringify(response5Day.daily[i].humidity));
                     fiveHumidity.attr("id", "#fiveHumidity[i]");
 
-                    // console.log(fiveHumidity);
                     let iconCode = response5Day.daily[i].weather[0].icon;
-                    // console.log(iconCode);
                     let iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png";
                     let weatherImgDay = $("<img>").attr("src", iconURL);
                     $("#testImage").attr("src", iconURL);
-                    // console.log(weatherImgDay);
 
                     cardbodyElem.append(fiveDate);
                     cardbodyElem.append(weatherImgDay); 
@@ -130,12 +122,7 @@ $(document).ready(function () {
                     cardbodyElem.append(fiveHumidity);
                     fiveDayCard.append(cardbodyElem);
                     $("#taco").append(fiveDayCard);
-
                     $("#fiveDayTemp[i]").empty();
-                    // console.log(response5Day);
-                    // $(fiveDayTemp).empty();
-                    // $(fiveHumidity).empty();
-                    
 
                 })
 

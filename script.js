@@ -13,13 +13,9 @@ $(document).ready(function () {
 
     $("#searchBtn").click(function (event) {
         event.preventDefault();
-    
-        
-        
+
         //grab search term from input search field
         let searchTerm = $("#search").val().trim();
-
-
 
         //construct the URL
         let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -38,8 +34,7 @@ $(document).ready(function () {
             if (previousCity) {
                 previousCity.push(response.name);
                 localStorage.setItem("cities", JSON.stringify(previousCity));
-            }
-            else {
+            } else {
                 searchArr.push(response.name)
                 localStorage.setItem("cities", JSON.stringify(searchArr));
             }
@@ -92,28 +87,27 @@ $(document).ready(function () {
                 }
                 cityName.append(currentUV);
                 renderSearchList();
-                
             })
 
             //start 5 day forecast ajax
             let day5QueryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&units=imperial" + APIKey;
 
             for (let i = 1; i < 6; i++) {
-            $.ajax({
-                url: day5QueryURL,
-                type: "GET"
-            }).then(function (response5Day) {
-                // console.log(response5Day);
+                $.ajax({
+                    url: day5QueryURL,
+                    type: "GET"
+                }).then(function (response5Day) {
+                    // console.log(response5Day);
                     let cardbodyElem = $("<div>").addClass("card-body");
-                
+
                     let fiveDayCard = $("<div>").addClass(".cardbody");
                     let fiveDate = $("<h5>").text(moment.unix(response5Day.daily[i].dt).format("MM/DD/YYYY"));
                     fiveDayCard.addClass("headline");
 
-                    let fiveDayTemp = $("<p>").text("Temp: " + response5Day.daily[i].temp.max);
+                    let fiveDayTemp = $("<p>").text("Temp: " + response5Day.daily[i].temp.max + "°");
                     fiveDayTemp.attr("id", "#fiveDayTemp[i]");
 
-                    let fiveHumidity = $("<p>").attr("id", "humDay").text("Humidity: " + JSON.stringify(response5Day.daily[i].humidity));
+                    let fiveHumidity = $("<p>").attr("id", "humDay").text("Humidity: " + JSON.stringify(response5Day.daily[i].humidity) + "%");
                     fiveHumidity.attr("id", "#fiveHumidity[i]");
 
                     let iconCode = response5Day.daily[i].weather[0].icon;
@@ -122,8 +116,8 @@ $(document).ready(function () {
                     $("#testImage").attr("src", iconURL);
 
                     cardbodyElem.append(fiveDate);
-                    cardbodyElem.append(weatherImgDay); 
-                    cardbodyElem.append(fiveDayTemp); 
+                    cardbodyElem.append(weatherImgDay);
+                    cardbodyElem.append(fiveDayTemp);
                     cardbodyElem.append(fiveHumidity);
                     fiveDayCard.append(cardbodyElem);
                     $("#taco").append(fiveDayCard);
@@ -136,23 +130,23 @@ $(document).ready(function () {
 })
 //need to figure out where to call the clearFields function to reset Search input
 function clearFields() {
-    $("#searchBtn").click(function() {
-    $("#search").val("");
+    $("#searchBtn").click(function () {
+        $("#search").val("");
     });
-    
+
 }
 
 function renderSearchList() {
     let searchList = JSON.parse(localStorage.getItem("cities"));
     $("#search-list").empty();
-            if (searchList) {
-              for (i=0; i< searchList.length; i++) {
-                let listBtn = $("<button>").attr('class', 'btn btn-secondary').text(searchList[i]);
-                let listElem = $("<li>").attr('class', 'list-group-item');
-                listElem.append(listBtn);
-                $("#search-list").append(listElem);
-              }
-              
-            }
-            
+    if (searchList) {
+        for (i = 0; i < searchList.length; i++) {
+            let listBtn = $("<button>").attr('class', 'btn btn-secondary').text(searchList[i]);
+            let listElem = $("<li>").attr('class', 'list-group-item');
+            listElem.append(listBtn);
+            $("#search-list").append(listElem);
+        }
+
+    }
+
 }

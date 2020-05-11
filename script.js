@@ -9,7 +9,7 @@ let APIKey = "&appid=b9330bfd0b1bf5fe0c849c27df315565";
 
 $(document).ready(function () {
     renderSearchList();
-    // clearFields();
+    
 
     $("#searchBtn").click(function (event) {
         event.preventDefault();
@@ -20,6 +20,7 @@ $(document).ready(function () {
         //construct the URL
         let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
             searchTerm + APIKey;
+  
 
         //add search term to top of list of cities
         $("<button>").text(searchTerm).prepend(".list-group-item");
@@ -97,7 +98,6 @@ $(document).ready(function () {
                     url: day5QueryURL,
                     type: "GET"
                 }).then(function (response5Day) {
-                    // console.log(response5Day);
                     let cardbodyElem = $("<div>").addClass("card-body");
 
                     let fiveDayCard = $("<div>").addClass(".cardbody");
@@ -124,17 +124,11 @@ $(document).ready(function () {
                     $("#fiveDayTemp[i]").empty();
                 })
             }
+            $("#search").val("");
         })
     })
 
 })
-//need to figure out where to call the clearFields function to reset Search input
-function clearFields() {
-    $("#searchBtn").click(function () {
-        $("#search").val("");
-    });
-
-}
 
 function renderSearchList() {
     let searchList = JSON.parse(localStorage.getItem("cities"));
@@ -150,3 +144,10 @@ function renderSearchList() {
     }
 
 }
+
+$(".btn").click(function() {
+    JSON.parse(localStorage.getItem("cities"));
+    renderSearchList;
+
+    
+})

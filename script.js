@@ -50,7 +50,7 @@ $(document).ready(function () {
                 let windData = $("<p>").text("Wind Speed: " + response.wind.speed).addClass("lead");
                 let humidityData = $("<p>").text("Humidity: " + response.main.humidity + "%").addClass("lead");
                 var iconcode = response.weather[0].icon;
-                var iconurl = "http://openweathermap.org/img/w/" + iconcode + ".png";
+                var iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png";
                 let weatherImg = $("<img>").attr("src", iconurl);
                 let date = $("<p>").text(moment.unix().format("MMM Do YY")).addClass("lead");
                 // console.log(date);
@@ -70,7 +70,7 @@ $(document).ready(function () {
                 //ajax call for UV Index
                 let latitude = response.coord.lat;
                 let longitude = response.coord.lon;
-                let uvIndexURL = "http://api.openweathermap.org/data/2.5/uvi?" + APIKey + "&lat=" + latitude + "&lon=" + longitude;
+                let uvIndexURL = "https://api.openweathermap.org/data/2.5/uvi?" + APIKey + "&lat=" + latitude + "&lon=" + longitude;
                 $.ajax({
                     type: "GET",
                     url: uvIndexURL,
@@ -114,7 +114,7 @@ $(document).ready(function () {
                         fiveHumidity.attr("id", "#fiveHumidity[i]");
 
                         let iconCode = response5Day.daily[i].weather[0].icon;
-                        let iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png";
+                        let iconURL = "https://openweathermap.org/img/w/" + iconCode + ".png";
                         let weatherImgDay = $("<img>").attr("src", iconURL);
                         $("#testImage").attr("src", iconURL);
 

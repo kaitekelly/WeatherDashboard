@@ -21,17 +21,34 @@ padding-left: 15px;
     color: white;
 }
 
+.card {
+    border: none;
+    /* float: right; */
+}
+
 
 .card-body {
     font-family: Arial, Helvetica, sans-serif;
     background-color: rgb(72, 160,181);
     font-size: 16pt;
     color: white;
-    float: left;
+    display: inline-block;
+    /* float: right; */
     border: solid rgb(74, 224, 226) 2px;
-    width: 18rem;
-    margin-bottom: 20px;
+    margin: 20px;
+    padding: 40px;
+    flex-direction: row;
+   
+    
 }
+/* .clearfix {
+    overflow: auto;
+  } */
+/* 
+ #card-row {
+    height: 200px;
+
+ } */
 
 .nav {
     display: flex;
@@ -42,6 +59,8 @@ padding-left: 15px;
  .headline {
      font-size: 34px;
      border: none;
+     display: inline-block;
+     float: left;
  } 
 
  .lead {
@@ -65,21 +84,37 @@ padding-left: 15px;
      margin-right: 25px;
  }
 
- .list-group-item {
+ .list-group {
      /* float: left; */
-     
+    /* list-style: none;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden; */
  }
 
  #li {
      padding: 20px;
  }
 
-#taco {
-    width: 18rem;
+#five-day {
+    /* width: 18rem; */
+    display: inline-block;
+    /* float: auto; */
+    height: 100px;
+    /* flex-direction: row; */
+}
+
+.card {
+    position: relative;
+    display: inline-block;
+    float: right;
+    /* box-sizing: content-box; */
 }
 
 .cardbody {
     border: none;
+    display: inline-block;
+    flex-direction: row;
 }
 
 .badge-success {
@@ -90,7 +125,6 @@ padding-left: 15px;
     background-color: yellow;
 
 }
-
 
 .badge-warning {
     background-color:orange;

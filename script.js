@@ -54,7 +54,7 @@ $(document).ready(function () {
                 let weatherImg = $("<img>").attr("src", iconurl);
                 let date = $("<p>").text(moment.unix().format("MMM Do YY")).addClass("lead");
                 // console.log(date);
-                $("#taco").empty();
+                $("#five-day").empty();
                 // Convert the temp to fahrenheit
                 let tempF = (response.main.temp - 273.15) * 1.80 + 32;
                 let roundedTemp = Math.floor(tempF);
@@ -123,12 +123,22 @@ $(document).ready(function () {
                         cardbodyElem.append(fiveDayTemp);
                         cardbodyElem.append(fiveHumidity);
                         fiveDayCard.append(cardbodyElem);
-                        $("#taco").append(fiveDayCard);
+                        $("#five-day").append(fiveDayCard);
                         $("#fiveDayTemp[i]").empty();
                     })
                 }
                 $("#search").val("");
+                $(document).on("click", ".city-btn", function() {
+                    JSON.parse(localStorage.getItem("cities"));
+                    console.log(this);
+                    let searchTerm = $(this).text();
+                    console.log(searchTerm);
+                    // triggerSearch();
+                    
+            
+                });
             })
+            
         }
     })
 
@@ -148,13 +158,13 @@ $(document).ready(function () {
         }
 
     }
-    $(document).on("click", ".city-btn", function () {
-        JSON.parse(localStorage.getItem("cities"));
-        console.log(this);
-        let textBtn = $(this).text();
-
-    });
+  
 })
+
+// function renderLastSearch() {
+//     let cityName = localStorage.getItem("cities");
+//     cityName.text()
+// }
 
 // $("city-btn").click(function () {
 //     JSON.parse(localStorage.getItem("cities"));

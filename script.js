@@ -43,7 +43,7 @@ $(document).ready(function () {
                     localStorage.setItem("cities", JSON.stringify(searchArr));
                 }
                 //transfer content to HTML
-                let cityName = $(".jumbotron").text(searchTerm + " Weather Details  ").addClass("city-weather");
+                let cityName = $(".jumbotron").addClass("city-weather").text(searchTerm + " Weather Details  ");
                 // console.log(cityName);
                 let currentDate = moment().format("  MM-DD-YYYY");
                 // console.log(currentDate);
@@ -125,6 +125,7 @@ $(document).ready(function () {
                         fiveDayCard.append(cardbodyElem);
                         $("#five-day").append(fiveDayCard);
                         $("#fiveDayTemp[i]").empty();
+                        $(".jumbotron").append(cardbodyElem);
                     })
                 }
                 $("#search").val("");

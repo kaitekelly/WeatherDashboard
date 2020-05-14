@@ -10,7 +10,6 @@ let APIKey = "&appid=b9330bfd0b1bf5fe0c849c27df315565";
 $(document).ready(function () {
     renderSearchList();
 
-
     $("#searchBtn").click(function (event) {
         event.preventDefault();
 

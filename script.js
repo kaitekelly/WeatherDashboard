@@ -12,20 +12,15 @@ $(document).ready(function () {
 
     $("#searchBtn").click(function (event) {
         event.preventDefault();
-
         //grab search term from input search field
         let searchTerm = $("#search").val().trim();
         triggerSearch(searchTerm);
     })
 
     function triggerSearch(citySearch) {
-
-
-
         //construct the URL
         let queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +
-        citySearch + APIKey;
-
+            citySearch + APIKey;
 
         //add search term to top of list of cities
         $("<button>").text(citySearch).prepend(".list-group-item");
@@ -34,8 +29,6 @@ $(document).ready(function () {
             type: "GET",
             url: queryURL
         }).then(function (response) {
-            $("h1").text(JSON.stringify(response));
-            console.log(response.name);
             let previousCity = JSON.parse(localStorage.getItem("cities"));
             if (previousCity) {
                 previousCity.push(response.name);
@@ -46,16 +39,13 @@ $(document).ready(function () {
             }
             //transfer content to HTML
             let cityName = $(".jumbotron").addClass("city-weather").text(citySearch + " Weather Details  ");
-            // console.log(cityName);
             let currentDate = moment().format("  MM-DD-YYYY");
-            // console.log(currentDate);
             let windData = $("<p>").text("Wind Speed: " + response.wind.speed).addClass("lead");
             let humidityData = $("<p>").text("Humidity: " + response.main.humidity + "%").addClass("lead");
             var iconcode = response.weather[0].icon;
             var iconurl = "https://openweathermap.org/img/w/" + iconcode + ".png";
             let weatherImg = $("<img>").attr("src", iconurl);
             let date = $("<p>").text(moment.unix().format("MMM Do YY")).addClass("lead");
-            // console.log(date);
             $("#five-day").empty();
             // Convert the temp to fahrenheit
             let tempF = (response.main.temp - 273.15) * 1.80 + 32;
@@ -131,20 +121,14 @@ $(document).ready(function () {
                 })
             }
             $("#search").val("");
-            
+
         })
 
     }
     $(document).on("click", ".city-btn", function () {
         JSON.parse(localStorage.getItem("cities"));
-        console.log(this);
         let citySearch = $(this).text();
-        console.log(citySearch);
         triggerSearch(citySearch);
-        // citySearch
-        // triggerSearch();
-
-
     });
 
     function renderSearchList() {
@@ -163,15 +147,3 @@ $(document).ready(function () {
     }
 
 })
-
-// function renderLastSearch() {
-//     let cityName = localStorage.getItem("cities");
-//     cityName.text()
-// }
-
-// $("city-btn").click(function () {
-//     JSON.parse(localStorage.getItem("cities"));
-//     console.log(this);
-
-
-// })
